@@ -66,7 +66,7 @@ def train(params):
         rgf_clf.fit(X_train, Y_train)
 
         # predict on test data
-        Y_pred = rgf_clf.predict(Y_test)
+        Y_pred = rgf_clf.predict(X_test)
         Y_pred_proba = rgf_clf.predict_proba(X_test)
 
         # log logistic loss value
