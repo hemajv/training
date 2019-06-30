@@ -1,4 +1,28 @@
 - hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.005
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.01
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.05
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.1
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
     l2: 1.0e-10
     learning_rate: 0.005
     loss: Log
@@ -6,7 +30,19 @@
     verbose: true
 - hyperparam_set:
     l2: 1.0e-10
+    learning_rate: 0.01
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-10
     learning_rate: 0.05
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-10
+    learning_rate: 0.1
     loss: Log
     max_leaf: 5000
     verbose: true
@@ -18,13 +54,55 @@
     verbose: true
 - hyperparam_set:
     l2: 1.0e-08
+    learning_rate: 0.01
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-08
     learning_rate: 0.05
     loss: Log
     max_leaf: 5000
     verbose: true
 - hyperparam_set:
+    l2: 1.0e-08
+    learning_rate: 0.1
+    loss: Log
+    max_leaf: 5000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.005
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.01
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.05
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-12
+    learning_rate: 0.1
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
     l2: 1.0e-10
     learning_rate: 0.005
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-10
+    learning_rate: 0.01
     loss: Log
     max_leaf: 10000
     verbose: true
@@ -35,6 +113,12 @@
     max_leaf: 10000
     verbose: true
 - hyperparam_set:
+    l2: 1.0e-10
+    learning_rate: 0.1
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
     l2: 1.0e-08
     learning_rate: 0.005
     loss: Log
@@ -42,7 +126,19 @@
     verbose: true
 - hyperparam_set:
     l2: 1.0e-08
+    learning_rate: 0.01
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-08
     learning_rate: 0.05
+    loss: Log
+    max_leaf: 10000
+    verbose: true
+- hyperparam_set:
+    l2: 1.0e-08
+    learning_rate: 0.1
     loss: Log
     max_leaf: 10000
     verbose: true
