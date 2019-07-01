@@ -7,10 +7,10 @@ if __name__ == "__main__":
     OUT_FNAME = "hyperparameters.yml"
 
     # hyperparameters to tune
-    hyperparams = {'max_leaf': [5000, 10000],
+    hyperparams = {'max_leaf': [2500, 5000],
                     'loss': ['Log'],
-                    'l2': [1e-12, 1e-10, 1e-8],
-                    'learning_rate': [5e-3, 1e-2, 5e-2, 1e-1],
+                    'l2': [1e-12, 1e-10],
+                    'learning_rate': [1e-2, 5e-2, 1e-1],
                     'verbose': [True]}
 
     # generate a list of dicts with specific values for each parameter
