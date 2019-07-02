@@ -3,14 +3,11 @@ import yaml
 import pprint
 import mlflow
 
+import numpy as np
 import dask.array as da
-from dask.distributed import Client
 from dask_ml.metrics import log_loss
 
-from joblib import parallel_backend
-
 from rgf.sklearn import RGFClassifier
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_fscore_support
 
 
@@ -49,29 +46,24 @@ def train(params):
     for k,v in params.items():
         mlflow.log_param(k, v)
 
-    # dask cliuent
-    client = Client()
+    # load dataset files
+    dataset = np.load('preprocessed/dataset.npz')
+    X_train = dataset['X_train']
+    X_test = dataset['X_test']
+    Y_train = dataset['Y_train']
+    Y_test = dataset['Y_test']
 
-    with parallel_backend('dask'):
-        # load the preprocessed data
-        # THIS ASSUME PREPROCESSING HAS BEEN DONE AND RESULT IS SAVED SOMEWHERE
-        X_arr = da.from_npy_stack('preprocessed/X_arr')
-        Y_arr = da.from_npy_stack('preprocessed/Y_arr')
+    # instantiate model with params
+    rgf_clf = RGFClassifier(**params)
+    rgf_clf.fit(X_train, Y_train)
 
-        # split for train-test
-        X_train, X_test, Y_train, Y_test = train_test_split(X_arr, Y_arr, stratify=Y_arr, test_size=0.2)
+    # predict on test data
+    Y_pred = rgf_clf.predict(X_test)
+    Y_pred_proba = rgf_clf.predict_proba(X_test)
 
-        # instantiate model with params
-        rgf_clf = RGFClassifier(**params)
-        rgf_clf.fit(X_train, Y_train)
-
-        # predict on test data
-        Y_pred = rgf_clf.predict(X_test)
-        Y_pred_proba = rgf_clf.predict_proba(X_test)
-
-        # log logistic loss value
-        logistic_loss = log_loss(Y_test, Y_pred_proba)
-        mlflow.log_metric('log_loss', logistic_loss)
+    # log logistic loss value
+    logistic_loss = log_loss(Y_test, Y_pred_proba)
+    mlflow.log_metric('log_loss', logistic_loss)
 
     # log precision, recall, f1
     p, r, f, _ = precision_recall_fscore_support(y_true=Y_test, y_pred=Y_pred, average='binary')
@@ -86,7 +78,7 @@ if __name__ == "__main__":
     if job_id is None:
         raise EnvironmentError("Could not find variable HYPERPARAM_SET_ID in environment. It must be defined for job to run")
 
-    # openshift pods complaint this being not a number
+    # openshift pods complaint this being not an int
     job_id = int(job_id)
 
     # get hyperparameters for this specific job
