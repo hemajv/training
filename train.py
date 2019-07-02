@@ -8,6 +8,7 @@ import dask.array as da
 from dask_ml.metrics import log_loss
 
 from rgf.sklearn import RGFClassifier
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_fscore_support
 
 
@@ -48,10 +49,11 @@ def train(params):
 
     # load dataset files
     dataset = np.load('preprocessed/dataset.npz')
-    X_train = dataset['X_train']
-    X_test = dataset['X_test']
-    Y_train = dataset['Y_train']
-    Y_test = dataset['Y_test']
+    X_arr = dataset['X_arr']
+    Y_arr = dataset['Y_arr']
+
+    # split for train-test
+    X_train, X_test, Y_train, Y_test = train_test_split(X_arr, Y_arr, stratify=Y_arr, test_size=0.2)
 
     # instantiate model with params
     rgf_clf = RGFClassifier(**params)
