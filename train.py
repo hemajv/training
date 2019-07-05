@@ -48,6 +48,7 @@ def train(params):
         mlflow.log_param(k, v)
 
     # load dataset files
+    # NOTE: to get meta data, set allow_pickle=True for np.load, then index into dataset object with key 'meta'
     dataset = np.load('preprocessed/dataset.npz')
     X_arr = dataset['X_arr']
     Y_arr = dataset['Y_arr']
@@ -72,6 +73,10 @@ def train(params):
     mlflow.log_metric('precision', p)
     mlflow.log_metric('recall', r)
     mlflow.log_metric('f1', f)
+
+    # which features matter the most
+    print("========== FEATURE IMPORTANCES ==========")
+    print(rgf_clf.feature_importances_)
 
 
 if __name__ == "__main__":
